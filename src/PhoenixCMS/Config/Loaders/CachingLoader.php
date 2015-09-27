@@ -10,6 +10,7 @@ use Nette\Caching\IStorage;
 use Nette\Neon\Neon;
 use PhoenixCMS\Config\FileNotFoundException;
 use PhoenixCMS\Config\ILoader;
+use PhoenixCMS\Utils\HashMap;
 
 
 class CachingLoader implements ILoader
@@ -27,7 +28,7 @@ class CachingLoader implements ILoader
 
 	/**
 	 * @param string $path
-	 * @return mixed
+	 * @return HashMap
 	 */
 	public function load($path)
 	{
@@ -35,9 +36,12 @@ class CachingLoader implements ILoader
 			throw new FileNotFoundException("File '$path' not found.");
 		}
 
-		return $this->cache->load($path, function (&$dependencies) use ($path) {
-			$dependencies[Cache::FILES] = $path;
-			return Neon::decode(file_get_contents($path));
-		});
+		return HashMap::from(
+			$this->cache->load($path, function (&$dependencies) use ($path) {
+				$dependencies[Cache::FILES] = $path;
+				return Neon::decode(file_get_contents($path));
+			}),
+			TRUE
+		);
 	}
 }

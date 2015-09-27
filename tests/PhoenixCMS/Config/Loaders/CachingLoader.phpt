@@ -33,8 +33,11 @@ $cache->clean([Cache::ALL => TRUE]);
 file_put_contents($config, Neon::encode($configData));
 
 Assert::null($cache->load($config));
-Assert::same($configData, $loader->load($config));
-Assert::same($configData, $cache->load($config));
+Assert::type('PhoenixCMS\Utils\HashMap', $loadedConfig = $loader->load($config));
+Assert::equal($configData, $cache->load($config));
+
+Assert::equal($configData['a'], $loadedConfig->getString('a'));
+Assert::equal($configData['b'][0], $loadedConfig->getArray('b')->getString(0));
 
 /*
 $configData['c'] = 'c';

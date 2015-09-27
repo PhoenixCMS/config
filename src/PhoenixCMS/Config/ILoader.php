@@ -5,12 +5,15 @@
 
 namespace PhoenixCMS\Config;
 
+use PhoenixCMS\Utils\HashMap;
+
+
 interface ILoader
 {
 
 	/**
 	 * @param string $path
-	 * @return mixed
+	 * @return HashMap
 	 */
 	function load($path);
 }

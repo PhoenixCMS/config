@@ -5,7 +5,7 @@
         "php": ">5.4.0",
         "nette/di": "2.3.6",
         "nette/caching": "2.4.2",
-        "phoenixcms/utils": "1.1.1"
+        "phoenixcms/utils": "1.2.0"
     },
     "require-dev": {
         "nette/tester": "~1.5.0"

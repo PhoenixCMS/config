@@ -10,9 +10,9 @@ use PhoenixCMS\Config\Loaders\CachingLoader;
 use Tester\Assert;
 
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
-$path = __DIR__ . '/../../../temp/';
+$path = __DIR__ . '/../temp/';
 $config = $path . 'PhoenixCMS.Config.file.neon';
 
 $storage = new FileStorage($path);
@@ -42,6 +42,9 @@ Assert::equal($configData['b'][0], $loadedConfig->getArray('b')->getString(0));
 /*
 $configData['c'] = 'c';
 file_put_contents($config, Neon::encode($configData));
+
+sleep(1);
+clearstatcache();
 $cache->clean([]); TODO fix
 
 Assert::null($cache->load($config));

@@ -10,9 +10,10 @@
     "require-dev": {
         "nette/tester": "~1.5.0"
     },
+    "minimum-stability": "dev",
     "autoload": {
-        "psr-0": {
-            "": "src/"
+        "psr-4": {
+            "PhoenixCMS\\Config\\": "src/"
         }
     }
 }
